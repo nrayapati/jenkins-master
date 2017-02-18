@@ -1,4 +1,4 @@
-FROM jenkinsci/jenkins:2.32
+FROM jenkins:2.32.2
 
 USER root
 
@@ -10,7 +10,7 @@ WORKDIR /tmp/files
 
 RUN chown -R jenkins.jenkins .
 USER jenkins
-RUN echo '<settings><mirrors><mirror><id>central</id><url>http://repo.jenkins-ci.org/simple/repo1-cache/</url><mirrorOf>central</mirrorOf></mirror></mirrors><localRepository>/usr/share/jenkins/ref/.m2/repository</localRepository></settings>' > settings.xml 
+RUN echo '<settings><mirrors><mirror><id>central</id><url>http://repo.jenkins-ci.org/simple/repo1-cache/</url><mirrorOf>central</mirrorOf></mirror></mirrors><localRepository>/usr/share/jenkins/ref/.m2/repository</localRepository></settings>' > settings.xml
 COPY plugins.txt ./
 RUN /usr/local/bin/install-plugins.sh $(cat plugins.txt)
 
